@@ -26,9 +26,6 @@ int menu(){
 }
 
 
-/*  no momento o meu problema eh q preciso verificar se o usuario nao digitou so um '\n' ao inves de um 
-    nome de vdd, no momento eu so to ignorando se so foi digitado um '\n'
-*/
 int insereNome(int tamanho){
     char letra;
 
@@ -43,10 +40,9 @@ int insereNome(int tamanho){
             exit(1);
         }
     }
-    else if(tamanho > 0){       // se nao estiver vazia, substitui o '\0' por '#', incrementa tamanho e aloca um espaco para o proximo caractere
+    else if(tamanho > 0){       // se nao estiver vazia, substitui o '\0' por '#' e incrementa tamanho
         str[tamanho] = '#';     // o '#' eh para identificar onde termina um nome e comeca outro
         tamanho++;
-        // str = (char * ) realloc(str, sizeof(char) * (tamanho + 1));
         if (str == NULL){
             printf("Erro: falta de memoria\n");
             free(str);
@@ -123,15 +119,9 @@ int deletaNome(int tamanho){
     setbuf(stdin, NULL);
     deletaNome[tamanhoDeleta] = '\0';
 
-    /*  minha ideia pra achar a palavra eh: primeiramente pega o tamanho do nome digitado,
-        depois procura um nome com o mesmo tamanho e copia para uma string intermediaria,
-        e depois compara os caracteres
-        senao achar, segue aumentando posStr ate se igualar a tamanho
-    */
     // percorrendo a string, posStr eh a posicao no str, tamanhoNome eh o tamanho do nome ate o momento,
     // reseta quando acha um '#', quando tamanhoNome for igual a tamanhoDeleta, checa se o posStr esta
     // em um '#' ou um '\0'
-
 
     for (posStr = 0, tamanhoNome = 0; posStr <= tamanho || achouNome == 0 ; posStr++, tamanhoNome++){
 
