@@ -7,7 +7,7 @@ typedef struct List
 {
     int id;
     char name[30];
-    List *next;
+    struct List *next;
 } List;
 
 #endif
