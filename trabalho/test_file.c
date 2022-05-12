@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include "list_def.h"
 
+int main()
+{
+    Element *list = list_create();
+    printf("%p\n", list);
 
-int main(){
-    List *list_pointer = list_create();
+    printf("%d", list_is_empty(list));
 
-    printf("%p\n", list_pointer);
-
-    free(list_pointer);
+    free(list);
 
     return 0;
 }
