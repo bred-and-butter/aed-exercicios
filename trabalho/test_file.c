@@ -9,6 +9,8 @@ int main()
 
     printf("%d", list_is_empty(list));
 
+    list_size(list);
+
     free(list);
 
     return 0;

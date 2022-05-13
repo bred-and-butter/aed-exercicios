@@ -2,18 +2,22 @@
 #include <stdlib.h>
 #include "list_def.h"
 
-Element *list_create()  // aloca um unico espaco p/ elemento e preenche com NULL
+Element *list_create() // aloca um unico espaco p/ elemento e preenche com NULL
 {
     Element *list = (Element *)malloc(sizeof(Element));
 
-    list = NULL;
+    list->id = 0;
+    list->name[0] = '(';
+    list->next = NULL;
 
     return list;
 }
 
 bool list_is_empty(Element *list)
 {
-    if (list == NULL)
+    bool is_empty = (list->id == 0) && (list->name[0] == '(') && (list->next == NULL);
+
+    if (is_empty)
     {
         return true;
     }
@@ -25,11 +29,24 @@ bool list_is_empty(Element *list)
 
 int list_size(Element *list)
 {
-    Element *list_start, *runner;
+    Element *list_start = list, *runner;
+    int counter = 0;
 
-    for (list_start = list; runner == list_start; runner = runner->next)
+    if (list_is_empty(list))
     {
+        printf("funcao list_size: lista vazia: %p", list);
+        return 0;
     }
 
-    return true;
+    for (runner = list_start; runner == list_start; runner = runner->next)
+    {
+        printf("entrou");
+        if (runner == NULL)
+        {
+            printf("saindo");
+            break;
+        }
+    }
+    printf("fora da funcao");
+    return 0;
 }
