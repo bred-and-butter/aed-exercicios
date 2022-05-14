@@ -21,9 +21,9 @@ bool list_is_empty(Element *list);
 
 int list_size(Element *list);
 
-bool list_clear(Element *list);
+void list_clear(Element *list);
 
-Element *list_print(Element *list);
+void list_print(Element *list);
 
 Element *list_insert_start(Element *list, Element element);
 
