@@ -1,1 +1,1 @@
-NOTA: TENHO Q TERMINAR O list_insert_at
+PROGRESSO: tenho que fazer agora o list_remove_highest e o list_remove_even
