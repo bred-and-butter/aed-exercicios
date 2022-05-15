@@ -295,5 +295,45 @@ Element *list_remove_at(Element *list, int position)
     }
 
     printf("Sucesso\n");
-    return list; 
+    return list;
 }
+
+/*  percorre a lista toda p/ achar e armazenar
+    a posicao do elemento com maior id
+    depois chama list_remove_at e remove o elemento
+*/
+Element *list_remove_highest(Element *list)
+{
+    Element *runner;
+    int highest = 0, counter = 0, position = 0;
+
+    printf("Removendo elemento com maior id\n");
+    if (list_is_empty(list))
+    {
+        printf("Lista vazia, nada para remover\n");
+        return list;
+    }
+    else
+    {
+        runner = list;
+        
+        while (runner->next != list)
+        {
+            if (highest < runner->id)
+            {
+                printf("potencial maior id encontrado, atualizando posicao\n");
+                highest = runner->id;
+                position = counter;
+            }
+            printf("atualizando counter\n");
+            counter++;
+            runner = runner->next;
+        }
+
+        list = list_remove_at(list, position);
+    }
+
+    printf("Sucesso\n");
+    return list;
+}
+

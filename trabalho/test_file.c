@@ -46,10 +46,13 @@ int main()
     list = list_insert_at(list, define_sample(), 2);
     print_list_and_size(list);
 
+    list = list_remove_highest(list);
+    print_list_and_size(list);    
+
     list = list_remove_start(list);
     print_list_and_size(list);
 
-    list = list_insert_at(list, define_sample(), 2);
+    list = list_insert_at(list, define_sample(), 1);
     print_list_and_size(list);
 
     list = list_remove_at(list, 1);
