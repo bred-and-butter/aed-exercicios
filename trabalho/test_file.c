@@ -15,6 +15,13 @@ Element define_sample(){
     return sample;
 }
 
+void print_list_and_size(Element *list){
+    list_print(list);
+    printf("Tamanho: %d\n", list_size(list));
+
+    return;
+}
+
 // list vai sempre apontar pro primeiro elemento da lista
 // lista deve ser circular (ultimo elemento aponta p/ o primeiro)
 int main()
@@ -25,19 +32,25 @@ int main()
     printf("Lista criada\n");
 
     printf("Vazia?: %d\n", list_is_empty(list));
-
-    list_print(list);
-    printf("Tamanho: %d\n", list_size(list));
+    print_list_and_size(list);
 
     list = list_insert_start(list, define_sample());
-
-    list_print(list);
-    printf("Tamanho: %d\n", list_size(list));
+    print_list_and_size(list);
 
     list = list_insert_end(list, define_sample());
+    print_list_and_size(list);
 
-    list_print(list);
-    printf("Tamanho: %d\n", list_size(list));
+    list = list_insert_at(list, define_sample(), 1);
+    print_list_and_size(list);
+
+    list = list_insert_end(list, define_sample());
+    print_list_and_size(list);
+
+    list = list_insert_at(list, define_sample(), 2);
+    print_list_and_size(list);
+
+    list = list_insert_at(list, define_sample(), 2);
+    print_list_and_size(list);
 
     list_clear(list);
 

@@ -14,7 +14,7 @@ bool list_is_empty(Element *list)
 {
     bool is_empty = list==NULL;
 
-    printf("Checando se lista esta vazia\n");
+    //printf("Checando se lista esta vazia\n");
     if (is_empty)
     {
         return true;
@@ -122,14 +122,29 @@ Element *list_insert_start(Element *list, Element element)
 
 Element *list_insert_at(Element *list, Element element, int position)
 {
+    if (position == 0)
+    {
+        printf("list_insert_at: posicao escolhida coincide com primeiro elemento\n");
+        printf("list_insert_at: inserindo no inicio da lista...\n");
+        return list_insert_start(list, element);
+    }
+    else if (position == list_size(list) - 1)
+    {
+        printf("list_insert_at: posicao escolhida coincide com ultimo elemento\n");
+        printf("list_insert_at: inserindo no final da lista...\n");
+        return list_insert_end(list, element);
+    }
+
     Element *new = (Element*) malloc(sizeof(Element));
-    Element *runner;
+    Element *runner, *before;
     int counter = 0;
+    bool found = false;
 
     new->id = element.id;
     strcpy(new->name, element.name);
 
-    printf("Inserindo elemento na posicao %d...\n", position);
+
+    printf("Inserindo elemento na posicao %d...\n", position);  //base 0
     if (list_is_empty(list))
     {
         printf("Lista vazia, inserindo na posicao 0...\n");
@@ -143,15 +158,26 @@ Element *list_insert_at(Element *list, Element element, int position)
         {
             if (counter < position)
             {
-                /* code */
+                before = runner;
+                runner = runner->next;
+                counter++;
             }
-            
-            runner = runner->next;
-            counter++;
-        } while ((runner->next != list) && (counter < position));
+            else if(counter == position)   //counter == position, chegou na posicao
+            {
+                found = true;
+                before->next = new;
+                new->next = runner;
+                break;    
+            }
 
-        runner->next = new;
-        
+        } while (runner->next != list);
+
+        if (!found)
+        {
+            printf("list_insert_at: posicao nao encontrada\n");
+            free(new);
+            return list;
+        }
     }
 
     printf("Sucesso\n");
