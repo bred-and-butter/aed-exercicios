@@ -14,6 +14,7 @@ bool list_is_empty(Element *list)
 {
     bool is_empty = list==NULL;
 
+    printf("Checando se lista esta vazia\n");
     if (is_empty)
     {
         return true;
@@ -66,10 +67,10 @@ void list_print(Element *list)
     return;
 }
 
-/*
+
 void list_clear(Element *list)
 {
-    Element *runner = list, *next;
+    Element *runner = list, *next = list;
 
     if (list_is_empty(list))
     {
@@ -77,13 +78,18 @@ void list_clear(Element *list)
         return;
     }
 
+    printf("Limpando lista...\n");
     do
     {
-        //code
-    } while (next != NULL);
-    
+        runner = next;
+        next = runner->next;
+        free(runner);
+    } while (next != list);
+
+    printf("Sucesso\n");
+    return;
 }
-*/
+
 
 Element *list_insert_start(Element *list, Element element)
 {
@@ -95,6 +101,7 @@ Element *list_insert_start(Element *list, Element element)
 
     //checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
     //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
+    printf("Inserindo elemento no comeco da lista...\n");
     if (list_is_empty(list))
         new->next = new;
     else
@@ -108,5 +115,73 @@ Element *list_insert_start(Element *list, Element element)
         last->next = new;
     }
 
+    printf("Sucesso\n");
     return new;
+}
+
+
+Element *list_insert_at(Element *list, Element element, int position)
+{
+    Element *new = (Element*) malloc(sizeof(Element));
+    Element *runner;
+    int counter = 0;
+
+    new->id = element.id;
+    strcpy(new->name, element.name);
+
+    printf("Inserindo elemento na posicao %d...\n", position);
+    if (list_is_empty(list))
+    {
+        printf("Lista vazia, inserindo na posicao 0...\n");
+        new->next = new;
+    }
+    else
+    {
+        runner = list;
+        
+        do
+        {
+            if (counter < position)
+            {
+                /* code */
+            }
+            
+            runner = runner->next;
+            counter++;
+        } while ((runner->next != list) && (counter < position));
+
+        runner->next = new;
+        
+    }
+
+    printf("Sucesso\n");
+    return list;    
+}
+
+Element *list_insert_end(Element *list, Element element)
+{
+    Element *new = (Element*) malloc(sizeof(Element));
+    Element *last;
+
+    new->id = element.id;
+    strcpy(new->name, element.name);
+
+    //checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
+    //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
+    printf("Inserindo elemento no fim da lista...\n");
+    if (list_is_empty(list))
+        new->next = new;
+    else
+    {
+        new->next = list;
+        last = list;
+        
+        while (last->next != list)
+            last = last->next;
+
+        last->next = new;
+    }
+
+    printf("Sucesso\n");
+    return list;    
 }

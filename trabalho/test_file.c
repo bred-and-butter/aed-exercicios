@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "list_def.h"
 
-// NOTA: PROXIMA FUNCAO A FAZER EH O LIST_CLEAR, TODO O RESTO FUNCIONA
-// 
+// NOTA: TENHO Q TERMINAR O list_insert_at
 
 Element define_sample(){
     Element sample;
-    sample.id = 3;
+    sample.id = rand();
     strcpy(sample.name, "Soldado 3");
     sample.next = NULL;
 
@@ -19,27 +19,27 @@ Element define_sample(){
 // lista deve ser circular (ultimo elemento aponta p/ o primeiro)
 int main()
 {
-    Element sample = define_sample();
+    srand(time(NULL));
 
     Element *list = list_create();
-    printf("Lista criada: %p\n", list);
+    printf("Lista criada\n");
 
     printf("Vazia?: %d\n", list_is_empty(list));
 
     list_print(list);
     printf("Tamanho: %d\n", list_size(list));
 
-    list = list_insert_start(list, sample);
+    list = list_insert_start(list, define_sample());
 
     list_print(list);
     printf("Tamanho: %d\n", list_size(list));
 
-    list = list_insert_start(list, sample);
+    list = list_insert_end(list, define_sample());
 
     list_print(list);
     printf("Tamanho: %d\n", list_size(list));
 
-    free(list);
+    list_clear(list);
 
     return 0;
 }
