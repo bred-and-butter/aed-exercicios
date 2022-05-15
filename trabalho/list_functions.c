@@ -337,3 +337,33 @@ Element *list_remove_highest(Element *list)
     return list;
 }
 
+
+Element *list_remove_even(Element *list)
+{
+    Element *runner;
+    int counter = 0;
+
+    printf("Removendo elementos com ids pares\n");
+    if (list_is_empty(list))
+    {
+        printf("Lista vazia, nada para remover\n");
+        return list;
+    }
+    else
+    {
+        runner = list;
+        
+        while (runner->next != list)
+        {
+            if (runner->id % 2 == 0)
+            {
+                printf("id par encontrado, removendo elemento\n");
+                
+            }
+            runner = runner->next;
+        }
+    }
+
+    printf("Sucesso\n");
+    return list;
+}
