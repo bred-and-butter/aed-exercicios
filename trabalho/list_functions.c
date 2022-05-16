@@ -381,3 +381,26 @@ Element *list_remove_even(Element *list)
     printf("Sucesso\n");
     return list;
 }
+
+
+Element *list_order_selection_sort(Element *list)
+{
+    Element *runner = list, *store_min;
+    int counter_outer, counter_inner, aux, size = list_size(list);
+
+    for (; runner->next != list; runner = runner->next)
+    {
+        store_min = runner;
+        for (counter_inner = (counter_outer+1); counter_inner < size; counter_inner++) {
+            if(num[counter_inner] < num[store_min]) 
+                store_min = counter_inner;
+            }
+            if (counter_outer != store_min) {
+                aux = num[counter_outer];
+                num[counter_outer] = num[store_min];
+                num[store_min] = aux;
+            }
+    }
+
+    return list;
+}
