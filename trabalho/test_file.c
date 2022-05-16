@@ -4,7 +4,6 @@
 #include <time.h>
 #include "list_def.h"
 
-// NOTA: TENHO Q TERMINAR O list_insert_at
 
 Element define_sample(){
     Element sample;
@@ -43,17 +42,22 @@ int main()
     list = list_insert_at(list, define_sample(), 1);
     print_list_and_size(list);
 
-    list = list_insert_at(list, define_sample(), 2);
+    list = list_insert_at(list, define_sample(), 1);
     print_list_and_size(list);
 
-    list = list_remove_highest(list);
-    print_list_and_size(list);    
+    list = list_insert_end(list, define_sample());
+    print_list_and_size(list);
 
     list = list_remove_start(list);
     print_list_and_size(list);
 
-    list = list_insert_at(list, define_sample(), 1);
+/*
+    list = list_remove_even(list);
     print_list_and_size(list);
+*/
+
+    list = list_remove_highest(list);
+    print_list_and_size(list);    
 
     list = list_remove_at(list, 1);
     print_list_and_size(list);

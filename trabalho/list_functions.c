@@ -340,8 +340,7 @@ Element *list_remove_highest(Element *list)
 
 Element *list_remove_even(Element *list)
 {
-    Element *runner;
-    int counter = 0;
+    Element *runner, *before, *last;
 
     printf("Removendo elementos com ids pares\n");
     if (list_is_empty(list))
@@ -351,17 +350,32 @@ Element *list_remove_even(Element *list)
     }
     else
     {
-        runner = list;
+        last = list;
         
-        while (runner->next != list)
+        while (last->next != list)
+            last = last->next;
+        
+        runner = list;
+        before = last;
+
+        do
         {
             if (runner->id % 2 == 0)
             {
-                printf("id par encontrado, removendo elemento\n");
-                
+                printf("Achou id par\n");
+
+                before->next = runner->next;
+                free(runner);
+
+                runner = before->next;
             }
-            runner = runner->next;
-        }
+            else if (runner->id % 2 != 0)
+            {
+                printf("Nao eh par\n");
+                before = runner;
+                runner = runner->next;
+            }
+        } while (runner->next != list);
     }
 
     printf("Sucesso\n");

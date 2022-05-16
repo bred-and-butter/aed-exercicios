@@ -1,1 +1,1 @@
-PROGRESSO: tenho que fazer agora o list_remove_highest e o list_remove_even
+PROGRESSO: nao consigo fazer o list_remove_even entao vou fazer o selection e o quick sort
