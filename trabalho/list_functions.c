@@ -3,9 +3,11 @@
 #include <string.h>
 #include "list_def.h"
 
-Element *list_create() // aloca um unico espaco p/ elemento e preenche com NULL
+Element *list_create()
 {
     Element *list = NULL;
+
+    printf("Criando lista\n");
 
     return list;
 }
@@ -101,7 +103,7 @@ Element *list_insert_start(Element *list, Element element)
 
     //checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
     //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
-    printf("Inserindo elemento no comeco da lista...\n");
+    printf("Inserindo elemento %s no comeco da lista...\n", element.name);
     if (list_is_empty(list))
         new->next = new;
     else
@@ -144,7 +146,7 @@ Element *list_insert_at(Element *list, Element element, int position)
     strcpy(new->name, element.name);
 
 
-    printf("Inserindo elemento na posicao %d...\n", position);  //base 0
+    printf("Inserindo elemento %s na posicao %d...\n", element.name, position);  //base 0
     if (list_is_empty(list))
     {
         printf("Lista vazia, inserindo na posicao 0...\n");
@@ -193,7 +195,7 @@ Element *list_insert_end(Element *list, Element element)
 
     //checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
     //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
-    printf("Inserindo elemento no fim da lista...\n");
+    printf("Inserindo elemento %s no fim da lista...\n", element.name);
     if (list_is_empty(list))
         new->next = new;
     else
@@ -216,7 +218,7 @@ Element *list_remove_start(Element *list)
 {
     Element *last, *new_start;
 
-    printf("Removendo elemento no inicio da lista...\n");
+    printf("Removendo elemento %s no inicio da lista...\n", list->name);
     if (list_is_empty(list))
     {
         printf("Lista vazia, nada para remover\n");
@@ -375,14 +377,14 @@ Element *list_remove_even(Element *list)
                 before = runner;
                 runner = runner->next;
             }
-        } while (runner->next != list);
+        } while ((runner->next != list) && !(list_is_empty(list)));
     }
 
     printf("Sucesso\n");
     return list;
 }
 
-
+/*
 Element *list_order_selection_sort(Element *list)
 {
     Element *runner = list, *store_min;
@@ -404,3 +406,4 @@ Element *list_order_selection_sort(Element *list)
 
     return list;
 }
+*/
