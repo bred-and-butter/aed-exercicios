@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "list_def.h"
 
 Element *list_create()
@@ -104,8 +105,10 @@ Element *list_insert_start(Element *list, Element element)
     //checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
     //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
     printf("Inserindo elemento %s no comeco da lista...\n", element.name);
-    if (list_is_empty(list))
+    if (list_is_empty(list)){
         new->next = new;
+        return new;
+    }
     else
     {
         new->next = list;
@@ -151,6 +154,7 @@ Element *list_insert_at(Element *list, Element element, int position)
     {
         printf("Lista vazia, inserindo na posicao 0...\n");
         new->next = new;
+        return new;
     }
     else
     {
@@ -197,7 +201,10 @@ Element *list_insert_end(Element *list, Element element)
     //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
     printf("Inserindo elemento %s no fim da lista...\n", element.name);
     if (list_is_empty(list))
+    {
         new->next = new;
+        return new;
+    }
     else
     {
         new->next = list;
@@ -374,10 +381,11 @@ Element *list_remove_even(Element *list)
             else if (runner->id % 2 != 0)
             {
                 printf("Nao eh par\n");
-                before = runner;
                 runner = runner->next;
+                before = before->next;
             }
-        } while ((runner->next != list) && !(list_is_empty(list)));
+            sleep(1);
+        } while ((runner != list) && !(list_is_empty(list)));
     }
 
     printf("Sucesso\n");

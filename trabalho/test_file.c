@@ -47,13 +47,13 @@ int main()
 
     list = list_insert_end(list, define_sample());
     print_list_and_size(list);
-
+/*
     list = list_remove_start(list);
     print_list_and_size(list);
-/*
+*/
     list = list_remove_even(list);
     print_list_and_size(list);
-*/
+
     list = list_remove_highest(list);
     print_list_and_size(list);    
 
