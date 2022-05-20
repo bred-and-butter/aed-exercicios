@@ -50,7 +50,7 @@ Element *begin_removal(Element *list)
         printf("Posicao inicial: %d\n", start_position);
         printf("Tamanho da lista: %d\n", size);
         if (chosen_position + start_position >= size)
-            chosen_position = (chosen_position)-size;
+            chosen_position = chosen_position - size;
         printf("Posicao resultante: %d\n", chosen_position);
 
         list = list_remove_at(list, chosen_position);
