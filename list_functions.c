@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+//#include <unistd.h>   exclusivo para sistemas linux, esta sendo usado apenas em list_remove_even
 #include "list_def.h"
 
 Element *list_create()
@@ -15,9 +15,8 @@ Element *list_create()
 
 bool list_is_empty(Element *list)
 {
-    bool is_empty = list==NULL;
+    bool is_empty = list == NULL;
 
-    //printf("Checando se lista esta vazia\n");
     if (is_empty)
     {
         return true;
@@ -38,17 +37,16 @@ int list_size(Element *list)
         printf("funcao list_size: lista vazia: %p\n", list);
         return 0;
     }
-    
+
     printf("Contando elementos...\n");
     do
     {
         counter++;
         runner = runner->next;
     } while (runner != list);
-    
+
     return counter;
 }
-
 
 void list_print(Element *list)
 {
@@ -59,17 +57,16 @@ void list_print(Element *list)
         printf("funcao list_print: lista vazia: %p\n", list);
         return;
     }
-    
+
     printf("Imprimindo lista:\n");
     do
     {
         printf("%d :: %s :: %p\n", runner->id, runner->name, runner->next);
         runner = runner->next;
     } while (runner != list);
-    
+
     return;
 }
-
 
 void list_clear(Element *list)
 {
@@ -93,19 +90,19 @@ void list_clear(Element *list)
     return;
 }
 
-
 Element *list_insert_start(Element *list, Element element)
 {
-    Element *new = (Element*) malloc(sizeof(Element));
+    Element *new = (Element *)malloc(sizeof(Element));
     Element *last;
 
     new->id = element.id;
     strcpy(new->name, element.name);
 
-    //checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
-    //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
+    // checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
+    // percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
     printf("Inserindo elemento %s no comeco da lista...\n", element.name);
-    if (list_is_empty(list)){
+    if (list_is_empty(list))
+    {
         new->next = new;
         return new;
     }
@@ -113,7 +110,7 @@ Element *list_insert_start(Element *list, Element element)
     {
         new->next = list;
         last = list;
-        
+
         while (last->next != list)
             last = last->next;
 
@@ -123,7 +120,6 @@ Element *list_insert_start(Element *list, Element element)
     printf("Sucesso\n");
     return new;
 }
-
 
 Element *list_insert_at(Element *list, Element element, int position)
 {
@@ -140,7 +136,7 @@ Element *list_insert_at(Element *list, Element element, int position)
         return list_insert_end(list, element);
     }
 
-    Element *new = (Element*) malloc(sizeof(Element));
+    Element *new = (Element *)malloc(sizeof(Element));
     Element *runner, *before;
     int counter = 0;
     bool found = false;
@@ -148,8 +144,7 @@ Element *list_insert_at(Element *list, Element element, int position)
     new->id = element.id;
     strcpy(new->name, element.name);
 
-
-    printf("Inserindo elemento %s na posicao %d...\n", element.name, position);  //base 0
+    printf("Inserindo elemento %s na posicao %d...\n", element.name, position); // base 0
     if (list_is_empty(list))
     {
         printf("Lista vazia, inserindo na posicao 0...\n");
@@ -159,7 +154,7 @@ Element *list_insert_at(Element *list, Element element, int position)
     else
     {
         runner = list;
-        
+
         do
         {
             if (counter < position)
@@ -168,12 +163,12 @@ Element *list_insert_at(Element *list, Element element, int position)
                 runner = runner->next;
                 counter++;
             }
-            else if(counter == position)   //counter == position, chegou na posicao
+            else if (counter == position) // counter == position, chegou na posicao
             {
                 found = true;
                 before->next = new;
                 new->next = runner;
-                break;    
+                break;
             }
         } while (runner->next != list);
 
@@ -186,19 +181,19 @@ Element *list_insert_at(Element *list, Element element, int position)
     }
 
     printf("Sucesso\n");
-    return list;    
+    return list;
 }
 
 Element *list_insert_end(Element *list, Element element)
 {
-    Element *new = (Element*) malloc(sizeof(Element));
+    Element *new = (Element *)malloc(sizeof(Element));
     Element *last;
 
     new->id = element.id;
     strcpy(new->name, element.name);
 
-    //checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
-    //percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
+    // checa se a lista ta vazia, se sim o novo elemento aponta pra ele mesmo, senao
+    // percorre toda a lista ate o elemento apontar p/ o comeco oq significa que chegou no final
     printf("Inserindo elemento %s no fim da lista...\n", element.name);
     if (list_is_empty(list))
     {
@@ -209,7 +204,7 @@ Element *list_insert_end(Element *list, Element element)
     {
         new->next = list;
         last = list;
-        
+
         while (last->next != list)
             last = last->next;
 
@@ -217,9 +212,8 @@ Element *list_insert_end(Element *list, Element element)
     }
 
     printf("Sucesso\n");
-    return list;    
+    return list;
 }
-
 
 Element *list_remove_start(Element *list)
 {
@@ -234,7 +228,7 @@ Element *list_remove_start(Element *list)
     else
     {
         last = list;
-        
+
         while (last->next != list)
             last = last->next;
 
@@ -244,9 +238,8 @@ Element *list_remove_start(Element *list)
     }
 
     printf("Sucesso\n");
-    return new_start;  
+    return new_start;
 }
-
 
 Element *list_remove_at(Element *list, int position)
 {
@@ -256,20 +249,12 @@ Element *list_remove_at(Element *list, int position)
         printf("list_remove_at: removendo no inicio da lista...\n");
         return list_remove_start(list);
     }
-/*
-    else if (position == list_size(list) - 1)
-    {
-        printf("list_insert_at: posicao escolhida coincide com ultimo elemento\n");
-        printf("list_insert_at: inserindo no final da lista...\n");
-        return list_insert_end(list, element);
-    }
-*/
 
     Element *runner, *before;
     int counter = 0;
     bool found = false;
 
-    printf("Removendo elemento na posicao %d...\n", position);  //base 0
+    printf("Removendo elemento na posicao %d...\n", position); // base 0
     if (list_is_empty(list))
     {
         printf("Lista vazia, nada para remover\n");
@@ -278,7 +263,7 @@ Element *list_remove_at(Element *list, int position)
     else
     {
         runner = list;
-        
+
         do
         {
             if (counter < position)
@@ -287,18 +272,18 @@ Element *list_remove_at(Element *list, int position)
                 runner = runner->next;
                 counter++;
             }
-            else if(counter == position)   //counter == position, chegou na posicao
+            else if (counter == position) // counter == position, chegou na posicao
             {
                 found = true;
                 before->next = runner->next;
                 free(runner);
-                break;    
+                break;
             }
-        } while (runner->next != list);
+        } while (runner != list);
 
         if (!found)
         {
-            printf("list_insert_at: posicao nao encontrada\n");
+            printf("list_remove_at: posicao nao encontrada\n");
             return list;
         }
     }
@@ -325,7 +310,7 @@ Element *list_remove_highest(Element *list)
     else
     {
         runner = list;
-        
+
         while (runner->next != list)
         {
             if (highest < runner->id)
@@ -346,7 +331,7 @@ Element *list_remove_highest(Element *list)
     return list;
 }
 
-
+// instavel
 Element *list_remove_even(Element *list)
 {
     Element *runner, *before, *last;
@@ -360,10 +345,10 @@ Element *list_remove_even(Element *list)
     else
     {
         last = list;
-        
+
         while (last->next != list)
             last = last->next;
-        
+
         runner = list;
         before = last;
 
@@ -384,34 +369,10 @@ Element *list_remove_even(Element *list)
                 runner = runner->next;
                 before = before->next;
             }
-            sleep(1);
+            // sleep(1);    opcional e exclusivo p/ linux
         } while ((runner != list) && !(list_is_empty(list)));
     }
 
     printf("Sucesso\n");
     return list;
 }
-
-/*
-Element *list_order_selection_sort(Element *list)
-{
-    Element *runner = list, *store_min;
-    int counter_outer, counter_inner, aux, size = list_size(list);
-
-    for (; runner->next != list; runner = runner->next)
-    {
-        store_min = runner;
-        for (counter_inner = (counter_outer+1); counter_inner < size; counter_inner++) {
-            if(num[counter_inner] < num[store_min]) 
-                store_min = counter_inner;
-            }
-            if (counter_outer != store_min) {
-                aux = num[counter_outer];
-                num[counter_outer] = num[store_min];
-                num[store_min] = aux;
-            }
-    }
-
-    return list;
-}
-*/

@@ -4,8 +4,8 @@
 #include <time.h>
 #include "list_def.h"
 
-
-Element define_sample(){
+Element define_sample()
+{
     Element sample;
     sample.id = rand();
     strcpy(sample.name, "Soldado 3");
@@ -14,7 +14,8 @@ Element define_sample(){
     return sample;
 }
 
-void print_list_and_size(Element *list){
+void print_list_and_size(Element *list)
+{
     list_print(list);
     printf("Tamanho: %d\n", list_size(list));
 
@@ -47,15 +48,15 @@ int main()
 
     list = list_insert_end(list, define_sample());
     print_list_and_size(list);
-/*
+    
     list = list_remove_start(list);
     print_list_and_size(list);
-*/
+/*
     list = list_remove_even(list);
     print_list_and_size(list);
-
+*/
     list = list_remove_highest(list);
-    print_list_and_size(list);    
+    print_list_and_size(list);
 
     list = list_remove_at(list, 1);
     print_list_and_size(list);
